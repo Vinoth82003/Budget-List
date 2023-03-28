@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checker ToDo..</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #aaa9a6b1;
+}
+
+.frame{
+    width: 650px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#input{
+    padding: 5px;
+    outline: none;
+}
+
+.frame .input{
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    flex-basis: 20%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.display{
+    width: 100%;
+    padding: 15px;
+    /* height: 100%; */
+    flex-basis: 80%;
+    background: #ffe4e4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+li{
+/* width: 300px; */
+list-style: none;
+padding: 5px 10px ;
+background: #ffffff;
+border-radius: 3px;
+display: flex;
+align-items: center;
+gap: 30px;
+}
+
+.delete{
+    padding: 5px ;
+    background: orange;
+    border: none;
+    border-radius: 3px;
+    flex-basis: 20%;
+    width: 100%;
+    height: 100%;
+    /* background-image: url(/img/images.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+li input[type = 'checkbox']{
+    flex-basis: 10%;
+    accent-color: orange;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input[type = 'checkbox'].active  {
+   
+    accent-color: red;
+}
+
+li.active{
+    background: #3a3939;
+    color: #fff;
+    text-decoration: line-through;
+}
+li.active input[type = 'checkbox']{
+    accent-color: red;
+}
+
+.button{
+    padding: 5px 10px ;
+    background: rgba(181, 64, 21, 0.833);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media(max-width:425px){
+    .frame{
+        width: 340px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frame">
+            <div class="input">
+                <input type="text" id="input"> 
+                <button type="button" class="button">add</button>
+                <button type="button" class="button clear">clear</button>
+            </div>
+            <ul class="display">
+            </ul>
+        </div>
+    </div>
+    <script>
+        const input = document.querySelector('input');
+const display = document.querySelector('.display');
+const add = document.querySelector('.button');
+const clear = document.querySelector('.clear');
+
+
+function addNewItem(listElement, itemInput) {
+    var listItem = document.createElement('li');
+    var listItemCheckbox = document.createElement('input');
+    var listItemLabel = document.createElement('label');
+    var deleteButton = document.createElement('button');
+
+    listItemCheckbox.type = 'checkbox';
+
+    deleteButton.className = 'delete';
+    deleteButton.innerHTML = 'Delete';
+   
+
+    listItemLabel.innerText = itemInput;
+
+    listElement.appendChild(listItem);
+    listItem.appendChild(listItemCheckbox);
+    listItem.appendChild(listItemLabel);
+    listItem.appendChild(deleteButton);
+
+    document.getElementById('input').value = '';
+    document.getElementById('input').focus();
+
+
+    const check_Boxs = document.querySelectorAll('input[type="checkbox"]');
+
+    console.log(check_Boxs);
+    check_Boxs.forEach(e => {
+        e.addEventListener('change',function (a) {
+            const parent = a.target.parentNode;
+            if (a.target.checked) {
+                parent.classList.add('active');
+            }else{
+                parent.classList.remove('active');
+            }
+        });
+    });
+
+
+    const delete_btn = document.querySelectorAll('.delete');
+
+    console.log(delete_btn);
+    delete_btn.forEach(e => {
+        e.addEventListener('click',function(){
+            this.parentNode.remove();
+        })
+    });
+
+   
+}
+
+
+add.addEventListener('click',function(){
+    const itemInput = input.value;
+    const listElement = display;
+    if (itemInput === '') {
+        alert('empty input..!');
+    }else{
+        addNewItem(listElement, itemInput);
+    }
+    
+    
+});
+
+clear.addEventListener('click',function(){
+    var childs = display.childElementCount;
+    console.log(childs);
+    for(let i = 0; i<childs; i++){
+        display.removeChild(display.firstElementChild);
+        console.log(i);
+    }
+});
+
+document.onkeypress = function () {
+    if (event.key === 'Enter') {
+        const itemInput = input.value;
+    const listElement = display;
+    if (itemInput === '') {
+        alert('empty input..!');
+    }else{
+        addNewItem(listElement, itemInput);
+    }
+    }
+}
+
+</script>
+</body>
+</html>
