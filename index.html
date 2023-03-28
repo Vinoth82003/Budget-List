@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget add</title>
+    </head>
+<body>
+    <div class="main_container">
+        <div class="inner_container">
+            <div class="budget_getter">
+                <div class="title">
+                    <input type="text" placeholder="eg: tour budget" id="title">
+                </div>
+                <div class="inner_box">
+                    <input type="number" id="budget" placeholder="eg: 5000"> 
+                    <button class="budget_get">Set</button>
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="name_input">
+                    <input type="text" id="name" placeholder="eg: travel">
+                </div>
+                <div class="amount_input">
+                    <input type="number" id="amount" placeholder="eg: 5000">
+                </div>
+                <div class="add_btn">
+                    <button class="add">add</button>
+                </div>
+                <div class="clear_btn">
+                    <button class="clear">clear</button>
+                </div>
+            </div>
+            <div class="display">
+                <div class="main_budget">
+                   <span>Budget On:</span><p id="main_title">title</p>
+                </div>
+                <ul class="list_items">
+                </ul>
+            </div>
+            <div class="total_of_all">
+                <div class="budget"><span>budget :</span><p id="user_budget">0 </p>/-</div>
+                <div class="total_cost"><span>total expence :</span><p id="total_amount"> 0 </p>/-</div>
+                <div class="extra_expence"><p id="extraexpence"></p></div>
+            </div>
+        </div>
+    </div>
+   </body>
+</html>
